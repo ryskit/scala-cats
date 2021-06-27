@@ -27,7 +27,6 @@ object Applicatives {
 
   // TODO: thought experiment
   def ap[W[_], A, B](wf: W[A => B])(wa: W[A]): W[B] = ???
-
   def productWithApplicative[W[_], A, B](wa: W[A], wb: W[B])(
     implicit applicative: Applicative[W]
   ): W[(A, B)] = {
@@ -35,5 +34,9 @@ object Applicatives {
       applicative.map(wa)(a => (b: B) => (a, b))
     ap(functionWrapper)(wb)
   }
+
+  // Applicatives have this ap[W[_], A, B](wf: W[A => B])(wa: W[A]): W[B]
+  // Applicatives can implement product from Semigroupal
+  // => Applicatives extends Semigroupal
   def main(args: Array[String]): Unit = {}
 }
